@@ -12,7 +12,10 @@ const app = express()
 app.use(cors(
     {
         origin: '*',
-        credentials: true
+        credentials: true,
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        allowedHeaders: 'Content-Type, Authorization',
+        exposedHeaders: 'Content-Type, Authorization'
     }
 ))
 app.use(express.json())
