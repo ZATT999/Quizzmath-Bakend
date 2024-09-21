@@ -1,0 +1,46 @@
+PUT http://localhost:3000/api/user/update
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZWYyYTM1MTQxODRkZTE5ZjlhZWJkYiIsImlhdCI6MTcyNjk0OTk0OSwiZXhwIjoxNzI3NTU0NzQ5fQ.oiD5KBoUgr5qofXHFKW4tr8qUkaYFPIiEnOA-MDf3rw
+
+Body:
+{
+    "id": "66ef2a3514184de19f9aebdb",
+    "proof": {
+        "description": "Preguntas básicas de matemáticas para principiantes.",
+        "development": [
+            {
+                "ask": "¿Cuál es el resultado de 5 + 3?",
+                "answers": ["6", "7", "8", "9"],
+                "answerCorrect": "8",
+                "stars": 2
+            },
+            {
+                "ask": "¿Qué número es el doble de 4?",
+                "answers": ["6", "7", "8", "9"],
+                "answerCorrect": "8",
+                "stars": 2
+            },
+            {
+                "ask": "¿Cuánto es 12 - 5?",
+                "answers": ["6", "7", "8", "9"],
+                "answerCorrect": "7",
+                "stars": 2
+            },
+            {
+                "ask": "¿Cuál es la mitad de 10?",
+                "answers": ["4", "5", "6", "7"],
+                "answerCorrect": "5",
+                "stars": 2
+            }
+        ],
+        "difficulty": "Fácil"
+    },
+    "onComplete": {
+        "completed": true,
+        "earnedStars": 8,
+        "results": [true, true, true, true]
+    },
+    "title": "Prueba de Matemáticas Básicas",
+    "stars": 8,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZWYyYTM1MTQxODRkZTE5ZjlhZWJkYiIsImlhdCI6MTcyNjk0OTk0OSwiZXhwIjoxNzI3NTU0NzQ5fQ.oiD5KBoUgr5qofXHFKW4tr8qUkaYFPIiEnOA-MDf3rw"
+}
