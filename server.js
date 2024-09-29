@@ -4,7 +4,6 @@ import cors from 'cors'
 import authRoutes from './routes/auth.js'
 import dotenv from 'dotenv'
 import rankingRoutes from './routes/ranking.js'
-import userRoutes from './routes/user.js'
 
 dotenv.config()
 
@@ -25,9 +24,8 @@ mongoose.connect(process.env.MONGO_URI, {
     useUnifiedTopology: true
 })
 
-app.use('/api/auth', authRoutes)
+app.use('/api/user', authRoutes)
 app.use('/api/ranking', rankingRoutes)
-app.use('/api/user', userRoutes)
 
 const PORT = process.env.PORT ?? 3000
 app.listen(PORT, () => {
