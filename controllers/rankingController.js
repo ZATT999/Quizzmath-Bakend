@@ -7,15 +7,18 @@ export const getRanking = async (req, res) => {
 
         // Asignar posición a cada usuario y actualizar en la base de datos
         const updatePromises = users.map((user, index) => {
-            const position = index + 1; // Calcular posición
-            return User.updateOne({ _id: user._id }, { position }); // Actualizar en la base de datos
+            user.position = index + 1; // Asignar posición
+            return User.updateOne({ _id: user._id }, { position: user.position }); // Actualizar en la base de datos
         });
 
-        // Esperar a que todas las actualizaciones se completen
-        await Promise.all(updatePromises);
+        await Promise.all(updatePromises); // Esperar a que todas las actualizaciones se completen
 
-        // Obtener nuevamente los usuarios para devolverlos con la posición actualizada
-        const updatedUsers = await User.find().sort({ stars: -1 }).select('username stars position');
+        // Retornar los usuarios con la nueva propiedad
+        const updatedUsers = users.map(user => ({
+            username: user.username,
+            stars: user.stars,
+            position: user.position
+        }));
 
         res.json(updatedUsers);
     } catch (error) {
