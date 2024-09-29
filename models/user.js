@@ -4,7 +4,9 @@ const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     stars: { type: Number, default: 0 },
-    proofs: { type: Array, default: [] }
+    proofs: { type: Array, default: [] },
+    position: { type: Number, default: 0 } // Asegúrate de que esta línea esté incluida
 });
 
-export default mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+export default User;
