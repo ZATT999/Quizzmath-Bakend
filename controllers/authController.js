@@ -14,14 +14,14 @@ export const register = async (req, res) => {
         if (existingUser) return res.status(400).json({ error: 'El usuario ya está registrado' });
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ username, password: hashedPassword, position: 0 }); // Establece la posición inicial
+        const newUser = new User({ username, password: hashedPassword, stars: 0, position: 0 });
         await newUser.save();
         res.status(201).json({ message: 'Usuario registrado con éxito' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error en el servidor' });
     }
-}
+};
 
 export const login = async (req, res) => {
     const { username, password } = req.body;
@@ -47,22 +47,22 @@ export const login = async (req, res) => {
         console.error('Server error:', error);
         res.status(500).json({ error: 'Error en el servidor' });
     }
-}
+};
 
 export const authenticateToken = (req, res, next) => {
-    const { token } = req.body
+    const { token } = req.body;
     if (!token) {
-        return res.sendStatus(401)
+        return res.sendStatus(401);
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) {
-            return res.sendStatus(403)
+            return res.sendStatus(403);
         }
-        req.user = user
-        next()
-    })
-}
+        req.user = user;
+        next();
+    });
+};
 
 export const me = async (req, res) => {
     try {
@@ -85,7 +85,36 @@ export const me = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Error en el servidor' });
     }
-}
+};
 
+export const getRanking = async (req, res) => {
+    try {
+        // Obtener usuarios ordenados por estrellas
+        const users = await User.find().sort({ stars: -1 }).select('_id username stars');
 
+        // Asignar posición a cada usuario
+        const updatedUsers = users.map((user, index) => ({
+            _id: user._id,
+            username: user.username,
+            stars: user.stars,
+            position: index + 1
+        }));
 
+        // Crear un array de actualizaciones para todos los usuarios
+        const updatePromises = updatedUsers.map(user => ({
+            updateOne: {
+                filter: { _id: user._id },
+                update: { position: user.position }
+            }
+        }));
+
+        // Realizar la actualización en la base de datos
+        await User.bulkWrite(updatePromises);
+
+        // Retornar los usuarios con la nueva propiedad
+        res.json(updatedUsers);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al obtener el ranking' });
+    }
+};
