@@ -83,7 +83,8 @@ export const me = async (req, res) => {
             proofs: user.proofs,
             id: user.id,
             username: user.username,
-            stars: user.stars
+            stars: user.stars,
+            position: user.position
         })
     } catch (error) {
         res.status(500).json({ error: 'Error en el servidor' })
