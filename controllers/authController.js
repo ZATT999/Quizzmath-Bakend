@@ -94,7 +94,7 @@ export const me = async (req, res) => {
 export const getRanking = async (req, res) => {
     try {
         // Obtener usuarios ordenados por estrellas
-        const users = await User.find().sort({ stars: -1 }).select('_id username stars');
+        const users = await User.find().sort({ stars: -1 }).select('_id username stars avatar');
 
         // Asignar posición a cada usuario
         const updatedUsers = users.map((user, index) => ({
@@ -102,6 +102,7 @@ export const getRanking = async (req, res) => {
             username: user.username,
             stars: user.stars,
             position: index + 1,
+            avatar: user.avatar
         }));
 
         // Crear un array de actualizaciones para todos los usuarios
