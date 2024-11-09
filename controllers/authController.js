@@ -70,7 +70,7 @@ export const me = async (req, res) => {
             return res.status(401).json({ error: 'No autorizado' });
         }
 
-        const user = await User.findById(req.user.id).select('username stars proofs position');
+        const user = await User.findById(req.user.id).select('username stars proofs position grade role avatar email');
         if (!user) {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
@@ -102,10 +102,6 @@ export const getRanking = async (req, res) => {
             username: user.username,
             stars: user.stars,
             position: index + 1,
-            grade: user.grade,
-            role: user.role,
-            avatar: user.avatar,
-            email: user.email
         }));
 
         // Crear un array de actualizaciones para todos los usuarios
