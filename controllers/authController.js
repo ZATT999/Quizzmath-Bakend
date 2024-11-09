@@ -14,7 +14,7 @@ export const register = async (req, res) => {
         if (existingUser) return res.status(400).json({ error: 'El usuario ya está registrado' });
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ username, password: hashedPassword, stars: 0, position: 0 });
+        const newUser = new User({ username, password: hashedPassword, stars: 0, position: 0, grade: 0, role: 'Primaria', avatar: 'https://avatars.dicebear.com/api/bottts/1.svg', email: username });
         await newUser.save();
         res.status(201).json({ message: 'Usuario registrado con éxito' });
     } catch (error) {
