@@ -83,7 +83,7 @@ export const me = async (req, res) => {
             position: user.position,
             grade: user.grade,
             role: user.role,
-            avatar: user.avatar,
+            avatar: `https://ui-avatars.com/api/?name=${user.username}&background=random&color=random&size=128`,
             // email: user.email
         });
     } catch (error) {

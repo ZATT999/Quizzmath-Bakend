@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     position: { type: Number, default: 0 },
     grade: { type: Number, default: 0 },
     role: { type: String, default: 'Primaria' },
-    avatar: { type: String, default: 'https://avatars.dicebear.com/api/bottts/1.svg' },
+    avatar: { type: String, default: '' },
     email: { type: String, required: true, unique: true },
 
 });
