@@ -81,6 +81,10 @@ export const me = async (req, res) => {
             username: user.username,
             stars: user.stars,
             position: user.position
+            grade: user.grade,
+            role: user.role,
+            avatar: user.avatar,
+            // email: user.email
         });
     } catch (error) {
         res.status(500).json({ error: 'Error en el servidor' });
