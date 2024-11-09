@@ -80,7 +80,7 @@ export const me = async (req, res) => {
             id: user.id,
             username: user.username,
             stars: user.stars,
-            position: user.position
+            position: user.position,
             grade: user.grade,
             role: user.role,
             avatar: user.avatar,
