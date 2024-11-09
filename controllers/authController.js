@@ -97,7 +97,11 @@ export const getRanking = async (req, res) => {
             _id: user._id,
             username: user.username,
             stars: user.stars,
-            position: index + 1
+            position: index + 1,
+            grade: user.grade,
+            role: user.role,
+            avatar: user.avatar,
+            email: user.email
         }));
 
         // Crear un array de actualizaciones para todos los usuarios
